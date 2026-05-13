@@ -53,18 +53,21 @@ Or use a GUI: **DB Browser for SQLite** (free, recommended).
 **1.** When a user logs a new activity, how many database tables are written to?
 List them and explain why each one is affected.
 
----
+---Ans: activities and notifications
+why: we have to update the activity row of the game started 
+and the notification for each friend
 
 **2.** You call `DELETE FROM users WHERE id = 3` directly in SQLite.
 What happens, and why? What would you need to do instead?
 
----
+---it fails because the foreign key constraint in sqlite is by default off, since no constraint we cant have a delete on cascade therefore, when we delete form users it leaves trailing orphan rows in other tables like notification, activities, friends and so on.
+     we do have to delete in the right order: notifications -> activities -> user_games -> friends -> then the user.
 
 **3.** User `nova` changes her username to `nova_2`.
 She then checks her friends' notification feeds.
 What do they see — the old name or the new one? Why?
 
----
+---Ans: the new name,but the older notifications will still have her old name why: because the message is a plain string written once at creation time and never updated. 
 
 **4.** Trace the full journey of a `POST /activities` request.
 Starting from the HTTP call, list every operation that happens before the response is returned.
