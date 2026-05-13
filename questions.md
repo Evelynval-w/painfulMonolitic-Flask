@@ -72,13 +72,15 @@ What do they see — the old name or the new one? Why?
 **4.** Trace the full journey of a `POST /activities` request.
 Starting from the HTTP call, list every operation that happens before the response is returned.
 
----
+--- flask receives the http post request --> opens the db --> inserts the new row into the activity table -> after it saves-> it fetches it back-> gets the authors name from users, gets the name title from games, fetches all friends-> goes through it friend and updates their notifications
+
+
 
 **5.** `pixel_queen` opts out of activity tracking.
 A teammate adds an `opted_out` boolean column to the `users` table and updates the `POST /activities` API route to check it.
 Is the feature fully implemented? What did they miss?
 
----
+--- No it doesnt, 
 
 **6.** How many rows are created in the database when `nova` logs one activity, given the current seed data?
 Show your working.
