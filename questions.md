@@ -80,12 +80,12 @@ Starting from the HTTP call, list every operation that happens before the respon
 A teammate adds an `opted_out` boolean column to the `users` table and updates the `POST /activities` API route to check it.
 Is the feature fully implemented? What did they miss?
 
---- No it doesnt, 
+--- No it isn't fully implemented
 
 **6.** How many rows are created in the database when `nova` logs one activity, given the current seed data?
 Show your working.
 
----
+--- 1 row of activities and 1 row of notification per friend 
 
 **7.** You need to delete `maya_r`.
 In what order must you delete rows across the tables, and why does the order matter?
