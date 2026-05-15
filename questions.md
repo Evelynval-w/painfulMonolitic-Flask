@@ -60,7 +60,7 @@ and the notification for each friend
 **2.** You call `DELETE FROM users WHERE id = 3` directly in SQLite.
 What happens, and why? What would you need to do instead?
 
----it fails because the foreign key constraint in sqlite is by default off, since no constraint we cant have a delete on cascade therefore, when we delete form users it leaves trailing orphan rows in other tables like notification, activities, friends and so on.
+---It actually succeeds because the foreign key constraint in sqlite is by default off, since no constraint we cant have a delete on cascade therefore, when we delete form users it leaves trailing orphan rows in other tables like notification, activities, friends and so on.
      we do have to delete in the right order: notifications -> activities -> user_games -> friends -> then the user.
 
 **3.** User `nova` changes her username to `nova_2`.
@@ -99,10 +99,15 @@ What happens if you try to delete an activity that has notifications attached to
 
 **9.** A bug is found in the game catalog — wrong genre for one game.
 You fix it and restart the app to ship the change.
+everything fails because the app runs with a single python process.. so when it restarts everything goes down and restarts and within that time nothing functions
+ 
 What else just went down, and for how long?
 
 ---
 
 **10.** A teammate says: *"let's just move the notification logic into its own function in `app.py`"*.
 Does that solve the problem described in Task 4?
+no it doesn't because the post acticity will not return if it has like 500 friend, notifications will have to update first for all friends 
+
 What is the actual architectural issue?
+because thr notification lives inline in the same process as everything
